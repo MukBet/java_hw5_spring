@@ -21,3 +21,11 @@ Liquibase, command below need to run each time after docker container was up(com
 To run database changeset in Maven console run `mvn clean package` or setup `mvn` util for terminal, maybe need just set Environmental variables.
 Liquibase config see in `liquibase.properties` file in resources.
 `mvn clean package` will start execute list of changes in db/changelog/db.changelog-master.yaml, 
+
+For rollbacks
+    mvn liquibase:rollback -Dliquibase.propertyFile=src/main/resources/liquibase.properties -Dliquibase.rollbackCount=2
+    mvn liquibase:update -Dliquibase.propertyFile=src/main/resources/liquibase.properties
+    mvn liquibase:rollback -Dliquibase.propertyFile=src/main/resources/liquibase.properties -Dliquibase.rollbackDate=2024-12-14T01:24:00
+    mvn liquibase:update -Dliquibase.propertyFile=src/main/resources/liquibase.properties
+
+
