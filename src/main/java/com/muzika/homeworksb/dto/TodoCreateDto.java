@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
 
-// priority: enum (optional, can be values like LOW, MEDIUM, HIGH)
 public record TodoCreateDto(
         @NotEmpty(message = "Title can't be empty")
         @Length(max = 100, message = "Title must be <= 100 characters")
@@ -21,4 +20,4 @@ public record TodoCreateDto(
         LocalDateTime dueDate,
 
         @Priority PriorityEnum priority
-) {}
+) { }

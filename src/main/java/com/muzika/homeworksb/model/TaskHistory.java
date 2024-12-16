@@ -1,5 +1,6 @@
 package com.muzika.homeworksb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,15 +29,16 @@ public class TaskHistory {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     /**
-     * Todo (reference to related Todo item)
+     * Reference to related Todo item
      */
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "todo_id", nullable = false)
+    @JsonIgnore
     private Todo todo;
 
     /**

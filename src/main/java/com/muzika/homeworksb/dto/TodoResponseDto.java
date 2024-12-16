@@ -15,4 +15,4 @@ public record TodoResponseDto(
     LocalDateTime createdDate,
     LocalDateTime updatedDate,
     Long userId
-) {}
+) { }

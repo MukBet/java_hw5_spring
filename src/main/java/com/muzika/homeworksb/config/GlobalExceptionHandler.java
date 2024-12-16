@@ -1,6 +1,7 @@
 package com.muzika.homeworksb.config;
 
 import com.muzika.homeworksb.exception.EntityNotFoundException;
+import jakarta.validation.ValidationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -47,7 +48,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException e) {
+        logger.error("Not found error: ", e);
         return getStandartTemplateOfResponseEntity(e, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(ValidationException e) {
+        logger.error("Validation error: ", e);
+        return getStandartTemplateOfResponseEntity(e, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
+        logger.error("Runtime error: ", e);
+        return getStandartTemplateOfResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private ResponseEntity<ErrorResponse> getStandartTemplateOfResponseEntity(
@@ -63,5 +77,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         LocalDateTime time,
         HttpStatus status,
         List<String> errors
-    ){}
+    ) { }
 }
